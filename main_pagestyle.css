@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+:root{
+    --mint:#eff9f0;
+    --richblack:#0a0a0a;
+    --palesilver:#ddc8c4;
+    --deeptaupe:#896A67;
+    --slategray:#69747c;
+    --order:int;
+}
+
+body{
+    background-color: var(--mint);
+    color: var(--richblack);
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    transition-duration: 0.5s;
+    
+}
+
+body.active{
+    transition-duration: 0.5s;
+    --mint:#0a0a0a;
+    --richblack:#eff9f0;
+    --palesilver:#896A67;
+    --deeptaupe:#ddc8c4;
+    --slategray:#69747c;
+}
+
+/*CSS Transition between observed objects*/
+.hidden{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all calc(100ms * var(--order));
+    }
+    
+    .show{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+    }
+    /*Complete                               */
+
+h1{
+    margin-left: 5px;
+}
+
+.nav ul{
+    text-align: right;
+    font-size: 20px;
+    margin-right: 1vh;
+}
+
+.nav ul a{
+    display: block;
+    text-decoration: none;
+}
+
+.nav ul li{
+    list-style: none;
+    display: inline-block;
+}
+
+.nav ul li a{
+    display: block;
+    text-decoration: none;
+    color: var(--richblack);
+    transition: all ease-in(2s);
+}
+
+.nav ul li a:hover{
+    background-color: var(--richblack);
+    color: var(--mint);
+}
+.themeSwitch:hover{
+    background-color: var(--richblack);
+    color: var(--mint);
+}
+
+.themeSwitch{
+    color: var(--richblack);
+    transition: all ease-in(2s);
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+#rect1{
+    width: 100%;
+    height: 10vh;
+    background-color: var(--richblack);
+    color: var(--mint);
+    margin-bottom: 4px;
+}
+
+#rect1 h1{
+    text-align: center;
+    padding: 10px;
+}
+
+#rect2{
+    width: 100%;
+    height: 300px;
+    background-color: var(--richblack);
+   
+}
+
+#bigboy{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.bigboyText{
+    margin:+5% 10px;
+}
+
+#bigboy{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#bigboy img{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-bottom: 12px;
+    width: 250px;
+    height: auto;
+}
+
+#bigboy p{
+    font-size: min(16vw,150px);
+}
+
+#smush{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#smush p{
+    margin-left: 5px;
+    color:var(--mint);
+    font-size: min(15vw,100px);
+}
+
+#smushparent img{
+    float:right;
+}
+
+.smushPic{
+    padding: 8px;
+    width: 476px;
+    height: auto;
+    margin-bottom: 17px;
+}
+
+#rect3{
+    width: 100%;
+    height: 400px;
+    background-color: var(--mint);
+   
+}
+
+.chickenPic{
+    margin-top: 14px;
+    padding: 8px;
+    width: 476px;
+    height: auto;
+    margin-bottom: 0px;
+}
+
+#chicken p{
+    color:var(--richblack);
+    font-size: min(15vw,100px);
+    margin-right: 5px;
+}
+
+#chickenparent p{
+    float:right;
+}
+
+
+#rect4{
+    width: 100%;
+    height: 300px;
+    background-color: var(--richblack);   
+}
+
+#leo img{
+    width:212px;
+    height: auto;
+}
+
+#leo p{
+    color: var(--mint);
+    font-size: min(15vw,100px);
+    margin-left: 5px;
+}
+
+#leo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.leoPic{
+    padding: 8px;
+    width: 476px;
+    height: auto;
+    margin-bottom: 17px;
+}
