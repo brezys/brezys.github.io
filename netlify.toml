@@ -18,4 +18,9 @@
 [[headers]]
   for = "/assets/*.js"
   [headers.values]
-    Content-Type = "application/javascript" 
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    X-Content-Type-Options = "nosniff" 
