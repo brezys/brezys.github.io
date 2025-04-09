@@ -152,34 +152,36 @@ function App() {
         <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl">
           {t('description', { days: String(daysUntilGraduation) })}
         </p>
-        <div className="flex space-x-4">
-          <a href="https://github.com/brezys" className="text-gray-600 hover:text-gray-900">
-            <Github size={24} />
-          </a>
-          <a href="mailto:nicholashbrezinski@gmail.com" className="text-gray-600 hover:text-gray-900">
-            <Mail size={24} />
-          </a>
-          <a href="https://linkedin.com/in/nick_brezinski" className="text-gray-600 hover:text-gray-900">
-            <Linkedin size={24} />
-          </a>
-          <button 
-            onClick={toggleLanguage}
-            className="text-gray-600 hover:text-gray-900"
-            title={language === 'en' ? '日本語' : 'English'}
-          >
-            <img 
-              src={`https://hatscripts.github.io/circle-flags/flags/${language === 'en' ? 'jp' : 'us'}.svg`}
-              width="24"
-              height="24"
-              alt={language === 'en' ? 'Japanese' : 'English'}
-              className="rounded-full"
-            />
-          </button>
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center space-x-4">
+            <a href="https://github.com/brezys" className="text-gray-600 hover:text-gray-900">
+              <Github size={24} />
+            </a>
+            <a href="mailto:nicholashbrezinski@gmail.com" className="text-gray-600 hover:text-gray-900">
+              <Mail size={24} />
+            </a>
+            <a href="https://www.linkedin.com/in/nicholas-brezinski/" className="text-gray-600 hover:text-gray-900">
+              <Linkedin size={24} />
+            </a>
+            <button 
+              onClick={toggleLanguage}
+              className="text-gray-600 hover:text-gray-900 flex items-center justify-center w-6 h-6"
+              title={language === 'en' ? '日本語' : 'English'}
+            >
+              <img 
+                src={`https://hatscripts.github.io/circle-flags/flags/${language === 'en' ? 'jp' : 'us'}.svg`}
+                width="24"
+                height="24"
+                alt={language === 'en' ? 'Japanese' : 'English'}
+                className="rounded-full"
+              />
+            </button>
+          </div>
           <a
-            href="/resume.pdf"
+            href="/Nicholas Brezinski Resume Updated.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors ml-4"
+            className="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
           >
             <FileText size={20} className="mr-2" />
             {t('viewResume')}
