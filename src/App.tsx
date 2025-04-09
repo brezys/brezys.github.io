@@ -230,7 +230,7 @@ function App() {
             >
               <Languages className="text-orange-500 mb-4" size={32} />
               <h3 className="text-xl font-semibold mb-2">{t('japanese')}</h3>
-              <p className="text-gray-600">JLPT N2 (In Progress)</p>
+              <p className="text-gray-600">{t('nlevel')}</p>
             </motion.div>
           </div>
         </div>

@@ -29,7 +29,8 @@ export const translations = {
       "Software Engineering Projects",
       "Machine Learning and Artificial Intelligence"
     ],
-    viewResume: "View Resume"
+    viewResume: "View Resume",
+    nlevel: "JLPT N2 (In Progress)"
   },
   ja: {
     greeting: "ニックです",
@@ -61,7 +62,8 @@ export const translations = {
       "ソフトウェアエンジニアリングプロジェクト",
       "機械学習と人工知能"
     ],
-    viewResume: "履歴書を見る"
+    viewResume: "履歴書を見る",
+    nlevel: "JLPT N2 (進行中)"
   }
 } as const;
 
