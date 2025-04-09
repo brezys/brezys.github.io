@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     greeting: "Hi, I'm Nick",
-    description: "Computer Science student graduating in {days} days. Passionate about building cool solutions to interesting problems.",
+    description: "Computer Science student graduating in {days} days. Passionate about developing innovative solutions to complex problems.",
     skills: "Skills",
     frontend: "Frontend Development",
     backend: "Backend Development",
@@ -34,7 +34,7 @@ export const translations = {
   },
   ja: {
     greeting: "ニックです",
-    description: "あと{days}日で卒業予定のコンピュータサイエンス専攻の学生です。面白い問題に対してクールなソリューションを作ることに情熱を持っています。",
+    description: "あと{days}日で卒業予定のコンピュータサイエンス専攻の学生です。創造的なソリューションを開発することに情熱を持っています。",
     skills: "スキル",
     frontend: "フロントエンド開発",
     backend: "バックエンド開発",

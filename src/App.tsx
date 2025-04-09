@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Mail, Linkedin, Code2, Terminal, Database, Brain, ExternalLink, GraduationCap, Briefcase, Calendar, Clock, Languages, FileText } from 'lucide-react';
 import { useLanguage } from './contexts/LanguageContext';
@@ -9,7 +9,46 @@ function App() {
   const [pinnedRepos, setPinnedRepos] = useState<any[]>([]);
   const graduationDate = new Date('2025-05-09');
   const today = new Date();
-  const daysUntilGraduation = Math.ceil((graduationDate - today) / (1000 * 60 * 60 * 24));
+  const daysUntilGraduation = Math.ceil((graduationDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+  
+  // Section refs for scrolling
+  const skillsRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+  
+  const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
+    if (!ref.current) return;
+    
+    const navbarHeight = 70; // Approximate navbar height in pixels
+    const targetPosition = ref.current.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 1000; // milliseconds
+    let startTimestamp: number | null = null;
+    
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const elapsed = timestamp - startTimestamp;
+      
+      // Easing function - easeInOutCubic
+      const calcProgress = (t: number) => {
+        return t < 0.5
+          ? 4 * t * t * t
+          : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      };
+      
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = calcProgress(progress);
+      
+      window.scrollTo(0, startPosition + distance * easedProgress);
+      
+      if (elapsed < duration) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  };
 
   useEffect(() => {
     // Fetch regular repositories
@@ -91,7 +130,7 @@ function App() {
     setLanguage(language === 'en' ? 'ja' : 'en');
   };
 
-  const RepoCard = ({ repo, isPinned = false }) => (
+  const RepoCard = ({ repo, isPinned = false }: { repo: any, isPinned?: boolean }) => (
     <motion.div 
       key={repo.id}
       whileHover={{ scale: 1.02 }}
@@ -140,11 +179,53 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navbar */}
+      <nav className="fixed top-0 right-0 w-full z-50 bg-white bg-opacity-90 shadow-sm py-4 px-6">
+        <div className="container mx-auto flex justify-end items-center">
+          <div className="flex items-center space-x-8">
+            <button 
+              onClick={() => scrollToSection(skillsRef)}
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+            >
+              {t('skills')}
+            </button>
+            <button 
+              onClick={() => scrollToSection(projectsRef)}
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+            >
+              {t('projects')}
+            </button>
+            <button 
+              onClick={() => scrollToSection(contactRef)}
+              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+            >
+              {t('connect')}
+            </button>
+            <button 
+              onClick={toggleLanguage}
+              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+              title={language === 'en' ? '日本語' : 'English'}
+            >
+              <img 
+                src={`https://hatscripts.github.io/circle-flags/flags/${language === 'en' ? 'jp' : 'us'}.svg`}
+                width="20"
+                height="20"
+                alt={language === 'en' ? 'Japanese' : 'English'}
+                className="rounded-full"
+              />
+              <span className="text-sm font-medium">
+                {language === 'en' ? 'JPN' : 'ENG'}
+              </span>
+            </button>
+          </div>
+        </div>
+      </nav>
+       
       {/* Hero Section */}
       <motion.header 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="container mx-auto px-4 py-16 md:py-32"
+        className="container mx-auto px-4 py-16 md:py-32 pt-24"
       >
         <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
           {t('greeting')}
@@ -163,19 +244,6 @@ function App() {
             <a href="https://www.linkedin.com/in/nicholas-brezinski/" className="text-gray-600 hover:text-gray-900">
               <Linkedin size={24} />
             </a>
-            <button 
-              onClick={toggleLanguage}
-              className="text-gray-600 hover:text-gray-900 flex items-center justify-center w-6 h-6"
-              title={language === 'en' ? '日本語' : 'English'}
-            >
-              <img 
-                src={`https://hatscripts.github.io/circle-flags/flags/${language === 'en' ? 'jp' : 'us'}.svg`}
-                width="24"
-                height="24"
-                alt={language === 'en' ? 'Japanese' : 'English'}
-                className="rounded-full"
-              />
-            </button>
           </div>
           <a
             href="/Nicholas Brezinski Resume Updated.pdf"
@@ -190,7 +258,7 @@ function App() {
       </motion.header>
 
       {/* Skills Section */}
-      <section className="bg-gray-50 py-16">
+      <section ref={skillsRef} className="bg-gray-50 py-16 scroll-mt-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">{t('skills')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -239,7 +307,7 @@ function App() {
       </section>
 
       {/* Projects Section */}
-      <section className="py-16">
+      <section ref={projectsRef} className="py-16 scroll-mt-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 mb-12">{t('projects')}</h2>
           
@@ -285,9 +353,12 @@ function App() {
             <div className="mt-4">
               <h4 className="font-semibold mb-2">{t('coursework')}</h4>
               <ul className="list-disc list-inside text-gray-600">
-                {t('courses').map((course, index) => (
-                  <li key={index}>{course}</li>
-                ))}
+                {(() => {
+                  const courses = t('courses');
+                  return Array.isArray(courses) 
+                    ? courses.map((course, index) => <li key={index}>{course}</li>)
+                    : null;
+                })()}
               </ul>
             </div>
           </div>
@@ -335,7 +406,7 @@ function App() {
         */}
       
       {/* Contact Section */}
-      <section className="bg-gray-50 py-16">
+      <section ref={contactRef} className="bg-gray-50 py-16 scroll-mt-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('connect')}</h2>
           <p className="text-xl text-gray-600 mb-8">{t('lookingFor')}</p>
